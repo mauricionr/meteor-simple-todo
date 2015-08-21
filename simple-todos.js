@@ -19,7 +19,8 @@ if (Meteor.isClient) {
       // Insert a task into the collection
       Tasks.insert({
         text: text,
-        createdAt: new Date() // current time
+        createdAt: new Date(), // current time
+
       });
 
       // Clear form
@@ -27,7 +28,8 @@ if (Meteor.isClient) {
     }
   });
   Template.task.events({
-    "click .toogle-checked": function (){
+    "click .toggle-checked": function (){
+      console.log(this.value);
       Tasks.update(this._id, {
         $set:{cheked: ! this.cheked}
       });

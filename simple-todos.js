@@ -3,18 +3,9 @@ if (Meteor.isClient) {
   // This code only runs on the client
   // This code only runs on the client
   Template.body.helpers({
-<<<<<<< HEAD
-    tasks: function(){
-     return [
-        {text: "This is task 1"},
-        {text: "This is task 2"},
-        {text: "This is task 1"}
-      ]
-=======
     tasks: function () {
       // Show newest tasks at the top
       return Tasks.find({}, {sort: {createdAt: -1}});
->>>>>>> 6e46117ad414142984f197eae8a149debfb204ff
     }
   });
   Template.body.events({
@@ -28,7 +19,8 @@ if (Meteor.isClient) {
       // Insert a task into the collection
       Tasks.insert({
         text: text,
-        createdAt: new Date() // current time
+        createdAt: new Date(),
+        checked:false// current time
       });
 
       // Clear form
@@ -36,9 +28,10 @@ if (Meteor.isClient) {
     }
   });
   Template.task.events({
-    "click .toogle-checked": function (){
+    "click .toggle-checked": function (){
+      console.log(this)
       Tasks.update(this._id, {
-        $set:{cheked: ! this.cheked}
+        $set: {checked:this.checked ? false : true}
       });
     },
     "click .delete": function (){
